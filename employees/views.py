@@ -1,6 +1,7 @@
 from employees.form import EmployeeForm
 from django.shortcuts import render, redirect
 from .models import Employee
+from .EMP_Library import delete
 
 def create(request):
     form = EmployeeForm()
@@ -37,11 +38,14 @@ def update(request, emp_id):
 
     return render(request, 'employee/create.html', { 'form': form })
 
-def delete(request, emp_id):
-    employee = Employee.objects.get(pk=emp_id)
+# def delete(request, emp_id):
+#     employee = Employee.objects.get(pk=emp_id)
 
-    if request.method == 'POST':
-        employee.delete()
-        return redirect('read')
+#     if request.method == 'POST':
+#         employee.delete()
+#         return redirect('read')
         
-    return render(request, 'employee/read.html')
+#     return render(request, 'employee/read.html')
+def delete1(request, emp_id):
+    delete(request, emp_id)
+    return redirect("read")
